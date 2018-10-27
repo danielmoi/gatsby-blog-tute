@@ -17,8 +17,6 @@ const createTagPages = (createPage, posts) => {
       })
     }
   })
-  console.log('🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩');
-  console.log('postsByTag:', postsByTag);
 
   const tags = Object.keys(postsByTag);
 
@@ -28,6 +26,19 @@ const createTagPages = (createPage, posts) => {
     context: {
       tags: tags.sort(),
     }
+  })
+
+  tags.forEach(tag => {
+    const posts = postsByTag[tag];
+
+    createPage({
+      path: `/tags/${tag}`,
+      component: singleTagIndexTemplate,
+      context: {
+        posts,
+        tag,
+      }
+    })
   })
 }
 
