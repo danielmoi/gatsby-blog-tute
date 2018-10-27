@@ -25,11 +25,7 @@ const Header = () => {
           }
         }
       `}
-      render={data => (
-        <div>
-          {data.site.siteMetadata.title}
-        </div>
-      )}
+      render={data => <TitleAndDescription data={data} />}
     />
   )
 }
