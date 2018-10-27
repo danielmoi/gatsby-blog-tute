@@ -1,5 +1,36 @@
 const path = require('path');
 
+const createTagPages = (createPage, posts) => {
+  const allTagsIndexTemplate = path.resolve('src/templates/allTagsIndex.js');
+  const singleTagIndexTemplate = path.resolve('src/templates/singleTagIndex.js');
+
+  const postsByTag = {};
+
+  posts.forEach(({ node }) => {
+    if (node.frontmatter.tags) {
+      node.frontmatter.tags.forEach(tag => {
+        if (!postsByTag[tag]) {
+          postsByTag[tag] = [];
+        }
+
+        postsByTag[tag].push(node);
+      })
+    }
+  })
+  console.log('🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩');
+  console.log('postsByTag:', postsByTag);
+
+  const tags = Object.keys(postsByTag);
+
+  createPage({
+    path: '/tags',
+    component: allTagsIndexTemplate,
+    context: {
+      tags: tags.sort(),
+    }
+  })
+}
+
 exports.createPages = (({ graphql, actions }) => {
   const { createPage } = actions;
   console.log('createPage:', createPage);
@@ -23,6 +54,8 @@ exports.createPages = (({ graphql, actions }) => {
                 node {
                   frontmatter {
                     path
+                    title
+                    tags
                   }
                 }
               }
@@ -31,6 +64,9 @@ exports.createPages = (({ graphql, actions }) => {
         `
       ).then(result => {
         const posts = result.data.allMarkdownRemark.edges;
+
+        createTagPages(createPage, posts);
+
         posts.forEach(({ node }, index) => {
           const path = node.frontmatter.path;
           createPage({
