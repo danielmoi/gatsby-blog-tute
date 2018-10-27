@@ -13,3 +13,77 @@ Or [view the live demo here](https://gatsby-starter-hello-world-demo.netlify.com
 
 ## Tutorial
 https://egghead.io/courses/build-a-blog-with-react-and-markdown-using-gatsby
+
+## GraphQL
+http://localhost:8000___graphql
+
+```
+{
+  site {
+    siteMetadata {
+      title
+      description
+    }
+  }
+}
+```
+Returns this:
+```
+{
+  "data": {
+    "site": {
+      "siteMetadata": {
+        "title": "My Blog",
+        "description": "This is my blog"
+      }
+    }
+  }
+}
+```
+
+```
+{
+  allMarkdownRemark {
+    edges {
+      node {
+        frontmatter {
+          title
+        }
+      }
+    }
+  }
+}
+```
+
+Returns this:
+```
+{
+  "data": {
+    "allMarkdownRemark": {
+      "edges": [
+        {
+          "node": {
+            "frontmatter": {
+              "title": "My First Post"
+            }
+          }
+        },
+        {
+          "node": {
+            "frontmatter": {
+              "title": "My Third Post"
+            }
+          }
+        },
+        {
+          "node": {
+            "frontmatter": {
+              "title": "My Second Post"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
