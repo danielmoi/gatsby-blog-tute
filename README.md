@@ -10,3 +10,6 @@ Or [view the live demo here](https://gatsby-starter-hello-world-demo.netlify.com
 
 ## Running in development
 `gatsby develop`
+
+## Tutorial
+https://egghead.io/courses/build-a-blog-with-react-and-markdown-using-gatsby
