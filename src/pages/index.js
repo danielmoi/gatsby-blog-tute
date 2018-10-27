@@ -9,12 +9,19 @@ const Layout = ({ data }) => {
   return (
     <div>
       <Header />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        fontFamily: 'avenir',
+      }}>
       {edges.map(edge => {
         const { frontmatter } = edge.node;
         return (
-          <div key={frontmatter.path}>{frontmatter.title}</div>
-        )
-      })}
+          <div key={frontmatter.path} style={{ marginBottom: '1rem' }}>{frontmatter.title}</div>
+          )
+        })}
+      </div>
     </div>
   )
 }
